@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import App from'./components/App';
+import './assets/styles.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { Provider } from 'react-redux'; //Allows to inject the Global State
+import { createStore } from 'redux'; // Initialize the Store
+import reducer from './store/reducer'; //import reducer from store folder
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const store = createStore(reducer); // pass the reducer to the store
+
+// store = { store } allows to entire applicaion to use the Redux Store Object
+ReactDOM.render(<Provider store = {store}><App/></Provider>,document.getElementById('root'));
